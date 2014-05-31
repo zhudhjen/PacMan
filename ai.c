@@ -1,6 +1,6 @@
 #include "ai.h"
 
-int moveAI (const classAI *this, const int **map, const int *ghostPos, const double pacPos, const int burst)
+int moveAI (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord ghostPos[], int ghostDir[], double pacPosX, double pacPosY, int burst)
 {
-    return this->move(this, map, ghostPos, pacPos, burst);
+    return this->move(this, map, ghostPos, ghostDir, pacPosX, pacPosY, burst);
 }

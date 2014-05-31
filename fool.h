@@ -1,18 +1,18 @@
 #ifndef _FOOL_H_
 #define _FOOL_H_
+
 #include "ai.h"
 
 typedef struct {
     //inherit from ai
-    classAI ai;
-
+    classAI base;
 } classFool;
 
-extern void foolConstruct (classFool *this, const double ai_speed, const double player_speed);
+extern void foolConstruct (classFool *this, double ai_speed, double player_speed, int index);
 
-static int foolMove (const classAI *this, const int **map, const int *ghostPos, const double pacPos, const int burst);
+static int foolMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord ghostPos[], int ghostDir[], double pacPosX, double pacPosY, int burst);
 
-extern void foolDestruct (const classAI *this);
+extern void foolDestruct (classAI *this);
 
-static void foolDfs (int **map, coord position );
+static void foolDfs (int map[MAP_HEIGHT][MAP_WIDTH], coord position);
 #endif /*_FOOL_H_*/

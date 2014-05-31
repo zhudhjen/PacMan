@@ -1,0 +1,9 @@
+Open Watcom C16 Optimizing Compiler Version 1.9
+Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+TESTMAIN.C(51): Warning! E1176: Parameter 2, pointer type mismatch
+TESTMAIN.C(51): Note! I2003: source conversion type is 'int (*)[28]'
+TESTMAIN.C(51): Note! I2004: target conversion type is 'int ()[1][24]'
+TESTMAIN.C: 53 lines, included 2052, 1 warnings, 0 errors
+Code size: 118
