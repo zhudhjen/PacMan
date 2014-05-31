@@ -1,7 +1,5 @@
-#include "fool.h"
-#include "fool.c"
+﻿#include "fool.h"
 #include "ai.h"
-#include "ai.c"
 #include "dos.h"
 
 #define MAP_WIDTH 24
