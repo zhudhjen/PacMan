@@ -3,12 +3,7 @@
 
 #include "ai.h"
 
-typedef struct {
-    //inherit from ai
-    classAI base;
-} classFool;
-
-extern void foolConstruct (classFool *this, double ai_speed, double player_speed, int index);
+extern void foolConstruct (classAI *this, double ai_speed, double player_speed, int index);
 
 static int foolMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord ghostPos[], int ghostDir[], double pacPosX, double pacPosY, int burst);
 

@@ -43,11 +43,11 @@ int ghostDir[4] = {0};
 int main()
 {
     int i;
-    classFool AI[4];
+    classAI AI[4];
     for (i = 0; i < 4; ++i)
     {
         foolConstruct(&AI[i], 1.f, 1.f, i);
     }
-    printf("%d\n", moveAI(&AI[0].base, map, ghostPos, ghostDir, 15.f, 16.f, 0));
+    printf("%d\n", moveAI(&AI[0], map, ghostPos, ghostDir, 15.f, 16.f, 0));
     return 0;
 }

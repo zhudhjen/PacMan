@@ -1,3 +1,0 @@
-ai.c(5): Warning! E1176: Parameter 1, pointer type mismatch
-ai.c(5): Note! I2003: source conversion type is 'classAI *'
-ai.c(5): Note! I2004: target conversion type is 'struct classAI *'

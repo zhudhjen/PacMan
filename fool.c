@@ -1,13 +1,13 @@
 #include "ai.h"
 #include "fool.h"
 
-extern void foolConstruct (classFool *this, double ai_speed, double player_speed, int ai_index)
+extern void foolConstruct (classAI *this, double ai_speed, double player_speed, int ai_index)
 {
-    this->base.move = foolMove;
+    this->move = foolMove;
 
-    this->base.aiSpeed = ai_speed;
-    this->base.playerSpeed = player_speed;
-    this->base.index = ai_index;
+    this->aiSpeed = ai_speed;
+    this->playerSpeed = player_speed;
+    this->index = ai_index;
     printf("AI 'fool' constructed. \n");
 }
 
