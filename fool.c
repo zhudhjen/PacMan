@@ -10,9 +10,9 @@ extern void foolConstruct (classFool *this, const double ai_speed, const double 
     printf("AI 'fool' constructed. \n");
 }
 
-static int foolMove (const classAI *this, const int **map, const bool burst)
+static int foolMove (const classAI *this, const int **map, const int *ghostPos, const double pacPos, const int burst)
 {
-    
+    printf("alive\n");
 }
 
 extern void foolDestruct (const classAI *this)

@@ -11,11 +11,11 @@ typedef int bool;
 typedef struct tagClassAI classAI;
 typedef struct tagClassAI {
     //move the monsters
-    int (*move)(const classAI *this, const int **map, const bool burst);
+    int (*move)(const classAI *this, const int **map, const int *ghostPos, const double pacPos, const int burst);
     
     double aiSpeed, playerSpeed;
 } classAI;
 
-int moveAI (const classAI *this, const int **map, const bool burst);
+int moveAI (const classAI *this, const int **map, const int *ghostPos, const double pacPos, const int burst);
 
 #endif /*_AI_H_*/
