@@ -1,0 +1,33 @@
+Open Watcom Make Version 1.9
+Portions Copyright (c) 1988-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+	wcc ai.c
+Open Watcom C16 Optimizing Compiler Version 1.9
+Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+ai.c(5): Warning! E1176: Parameter 1, pointer type mismatch
+ai.c(5): Note! I2003: source conversion type is 'classAI *'
+ai.c(5): Note! I2004: target conversion type is 'struct classAI *'
+ai.c: 16 lines, included 2021, 1 warnings, 0 errors
+Code size: 131
+	wcc fool.c
+Open Watcom C16 Optimizing Compiler Version 1.9
+Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+fool.c: 33 lines, included 2256, 0 warnings, 0 errors
+Code size: 282
+	wcc testmain.c
+Open Watcom C16 Optimizing Compiler Version 1.9
+Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+testmain.c: 53 lines, included 2064, 0 warnings, 0 errors
+Code size: 118
+	wlink option quiet name test.exe file { ai.obj fool.obj testmain.obj }
+Warning! W1027: file fool.obj(C:\WATCOM\PACMAN\fool.c): redefinition of _dx ignored
+Warning! W1027: file fool.obj(C:\WATCOM\PACMAN\fool.c): redefinition of _dy ignored
+Warning! W1027: file testmain.obj(C:\WATCOM\PACMAN\testmain.c): redefinition of _dx ignored
+Warning! W1027: file testmain.obj(C:\WATCOM\PACMAN\testmain.c): redefinition of _dy ignored
