@@ -37,10 +37,10 @@ int map[32][28] = {
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 2, 2, 2, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2, 2, 2, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 2, 2, 2, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 4, 4, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
@@ -92,16 +92,24 @@ void gameInitial() {
   pacman.dir = LEFT;
   pacman.speed = 0.6;
   drawPacman((int)pacman.screenX, (int)pacman.screenY, pacman.dir);
-  for (i = 0; i < 4; i++) {
+  for (i = 0; i < 3; i++) {
     ghost[i].mapX = 12 + i * 2;
     ghost[i].mapY = 16;
-    ghost[i].screenX = (12 + i * 2) * UNIT + UNIT / 2;
+    ghost[i].screenX = (12 + i * 2) * UNIT + UNIT;
     ghost[i].screenY = 16 * UNIT + UNIT / 2;
     ghost[i].dir = UP;
     ghost[i].burst = 0;
     ghost[i].speed = 0.4;
     drawGhost(i, (int)ghost[i].screenX, (int)ghost[i].screenY, ghost[i].dir);
   }
+  ghost[3].mapX = 14;
+  ghost[3].mapY = 14;
+  ghost[3].screenX = (12 + i * 2) * UNIT + UNIT / 2;
+  ghost[3].screenY = 16 * UNIT + UNIT / 2;
+  ghost[3].dir = LEFT;
+  ghost[3].burst = 0;
+  ghost[3].speed = 0.4;
+  drawGhost(3, (int)ghost[3].screenX, (int)ghost[3].screenY, ghost[3].dir);
 }
 
 void keyPress() {
@@ -250,22 +258,22 @@ void changeGhostDir(int i) {
     switch (ghost[i].dir) {
       case UP:
           if (map[ghost[i].mapX][ghost[i].mapY - 1] != 0)
-            flag = 1;
+            flag++;
           break;
       case DOWN:
           if (map[ghost[i].mapX][ghost[i].mapY + 1] != 0)
-            flag = 1;
+            flag++;
           break;
       case LEFT:
           if (map[ghost[i].mapX - 1][ghost[i].mapY] != 0)
-            flag = 1;
+            flag++;
           break;
       case RIGHT:
           if (map[ghost[i].mapX + 1][ghost[i].mapY] != 0)
-            flag = 1;
+            flag++;
           break;
     }
-    if (flag) {
+    if (flag >= 3) {
       coord ghostPos;
       ghostPos.x = ghost[i].mapX;
       ghostPos.y = ghost[i].mapY;
