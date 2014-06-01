@@ -48,7 +48,7 @@ int main()
     classAI AI[4];
     for (i = 0; i < 4; ++i)
     {
-        expertConstruct(&AI[i], 1.f, 1.f, i);
+        normalConstruct(&AI[i], 1.f, 1.f, i);
     }
     printf("%d\n", moveAI(&AI[0], map, ghostPos, ghostDir, 13.f, 12.f, 0));
     return 0;
