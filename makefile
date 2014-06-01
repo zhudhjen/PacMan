@@ -3,7 +3,7 @@ CC = wcc
 LINKER = wlink
 LFLAGS = option quiet
 
-OBJS = ai.obj fool.obj testmain.obj
+OBJS = ai.obj fool.obj normal.obj testmain.obj
 
 .c.obj : .autodepend
     $(CC) $<

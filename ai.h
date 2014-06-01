@@ -20,4 +20,6 @@ int moveAI(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *
 
 bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int direction);
 
+int getDistance(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, coord goal, int direction);
+
 #endif /* _AI_H_ */
