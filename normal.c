@@ -24,7 +24,7 @@ int normalMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
         {
             access[i] = TRUE;
             distance[i] = getDistance(map, ghostPos[this->index], 
-                newCoord(floor(pacPosX), floor(pacPosY)), i);
+                    newCoord(floor(pacPosX), floor(pacPosY)), i);
             if (distance[i] < mind)
             {
                 mind = distance[i];
