@@ -1,12 +1,3 @@
-Open Watcom Make Version 1.9
-Portions Copyright (c) 1988-2002 Sybase, Inc. All Rights Reserved.
-Source code is available under the Sybase Open Watcom Public License.
-See http://www.openwatcom.org/ for details.
-	wcc386  ai.c
-Open Watcom C32 Optimizing Compiler Version 1.9
-Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
-Source code is available under the Sybase Open Watcom Public License.
-See http://www.openwatcom.org/ for details.
 ai.h(14): Error! E1022: Missing or misspelled data type near '<<'
 ai.h(14): Error! E1026: Invalid declarator
 ai.h(14): Error! E1009: Expecting ';' but found '<<'
@@ -28,4 +19,3 @@ ai.h(14): Error! E1009: Expecting ';' but found '<<'
 ai.h(14): Error! E1022: Missing or misspelled data type near '<<'
 ai.h(14): Error! E1026: Invalid declarator
 ai.h(14): Error! E1147: Too many errors: compilation aborted
-Should this file be deleted [Yes/No] ? 

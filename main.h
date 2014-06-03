@@ -1,6 +1,8 @@
-﻿#include "fool.h"
-#include "ai.h"
+﻿#include "ai.c"
+#include "fool.c"
+#include "normal.c"
 #include "dos.h"
+#include "draw.c"
 
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 32

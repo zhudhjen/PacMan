@@ -45,6 +45,7 @@ double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH
     bool flag, dir[4];
     double averDist, eval, maxe = 0;
 
+    printf("deelEval\n");
     //search for a length of 10 blocks
     if (frame * this->aiSpeed >= 10 || dep>=5)
     {

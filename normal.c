@@ -13,7 +13,7 @@ extern void normalConstruct (classAI *this, double ai_speed, double player_speed
     srand(time(0));
 }
 
-int normalMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst)
+int normalMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord ghostPos[4], int ghostDir[4], double pacPosX, double pacPosY, int burst)
 {
     bool access[4];
     int decision, i, min, mind=999, max, maxd=0, distance[4];
@@ -29,29 +29,21 @@ int normalMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
             if (distance[i] < mind)
             {
                 mind = distance[i];
-                min = i;
+                decision = i;
             }
             if (distance[i] > maxd)
             {
                 maxd = distance[i];
-                max = i;
             }
         }
         else 
             access[i] = FALSE;
     }
-    if ( burst > 0 )
+    if (mind > 30 || (maxd - mind < 3 && mind > 5))
     {
-        decision = max;
-    }
-    else
-    {    
-        if (mind > 30 || (maxd - mind < 3 && mind > 5))
-        {
+        decision = rand() % 4;
+        while (!access[decision])
             decision = rand() % 4;
-            while (!access[decision])
-                decision = rand() % 4;
-        }
         else
         {
             decision = min;
