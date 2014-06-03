@@ -2,11 +2,6 @@
 #include "expert.h"
 #include <time.h>
 
-int burstRate, tburst, time;
-int tmap[MAP_HEIGHT][MAP_WIDTH];
-coord tghostPos[4];
-int tghostDir[4];
-
 extern void expertConstruct (classAI *this, double ai_speed, double player_speed, int ai_index)
 {
     this->move = expertMove;
@@ -35,7 +30,7 @@ int expertMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
             burstRate = 0;
             tmp = ghostDir[ind];
             ghostDir[ind] = i;
-            eval[i] = deepEval(time, this, ind, tmap, tghostPos, tghostDir, PacPos, &tburst);
+            eval[i] = deepEval(&time, this, ind, tmap, tghostPos, tghostDir, PacPos, &tburst);
             if (eval[i] > maxe)
                 decision = i;
             ghostDir[ind] = tmp;
@@ -43,12 +38,16 @@ int expertMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
     return decision;
 }
 
+//The dfs function, returning the evaluation of the situation
 double deepEval(int time, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, coord PacPos, int *burst)
 {
-    coord tmp, posBackup[4];
+    int tburst, count = 0, i, total = 0, timeGone = 0;
+    int tmap[MAP_HEIGHT][MAP_WIDTH];
+    coord tmp, tghostPos[4];
+    int tghostDir[4];
     bool flag, dir[4];
-    int count = 0, i, total = 0, timeGone = 0;
     double val;
+
     //search for a length of 10 blocks
     if (time >= 10 / this->aiSpeed)
     {
@@ -79,7 +78,7 @@ double deepEval(int time, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *
                 if (checkDirection(ghostPos[i], j))
                 {
                     count++;
-                    if ((dir[j] + ghostzDir[i]) % 4 != 1)
+                    if ((dir[j] + ghostDir[i]) % 4 != 1)
                     {
                         ghostDir[i] = j;
                         dir[j] = TRUE;

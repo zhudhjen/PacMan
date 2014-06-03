@@ -2,7 +2,6 @@
 #include "ai.h"
 #include "fool.h"
 #include "normal.h"
-#include "expert.h"
 
 int map[32][28] = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},

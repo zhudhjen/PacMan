@@ -17,6 +17,7 @@ int normalMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
 {
     bool access[4];
     int decision, i, min, mind=999, max, maxd=0, distance[4];
+
     for (i = 0; i < 4; ++i)
     {
         if ((i + ghostDir[this->index]) % 4 != 1 &&
@@ -50,6 +51,10 @@ int normalMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
             decision = rand() % 4;
             while (!access[decision])
                 decision = rand() % 4;
+        }
+        else
+        {
+            decision = min;
         }
     }
     return decision;
