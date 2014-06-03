@@ -9,7 +9,6 @@ extern void foolConstruct (classAI *this, double ai_speed, double player_speed, 
     this->aiSpeed = ai_speed;
     this->playerSpeed = player_speed;
     this->index = ai_index;
-    printf("AI 'fool' constructed. \n");
     srand(time(0));
 }
 
@@ -20,7 +19,7 @@ int foolMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, in
     int i;
     for (i = 0; i < 4; ++i)
     {
-        printf("%d: %d, %d  dir = %d\n", ghostPos[i].x, ghostPos[i].y, ghostDir[i]);
+        printf("%d: (%d, %d)  dir = %d\n", ghostPos[i].x, ghostPos[i].y, ghostDir[i]);
     }
     for (i = 0; i < 4; ++i)
     {

@@ -4,21 +4,26 @@ coord queue[1000];
 int depth[1000];
 bool g[MAP_HEIGHT][MAP_WIDTH];
 
+//call the function pointer which is initialized by the certain constructor
 int moveAI (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst)
 {
     return this->move(this, map, ghostPos, ghostDir, pacPosX, pacPosY, burst);
 }
 
+//check whether the given direction can be walked through
 bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int direction)
 {
     coord newPos = coordMove(pos, direction);
+    printf("checking: (%d, %d) %d", pos.x, pos.y, direction);
     if ((map[newPos.y][newPos.x] == 0)||
         (map[pos.y][pos.x] != 4 && map[newPos.y][newPos.x] == 4))
+        printf(": FALSE\n");
         return FALSE;
     else
         return TRUE;
 }
 
+//get the distance from pos to goal from the given direction
 int getDistance(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, coord goal, int direction)
 {
     coord cur, tmp;
@@ -67,3 +72,30 @@ int getDistance(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, coord goal, int direc
     }
     return -1;
 }
+
+//calculate the weighted distance of points of a given type in a given range
+int countWeightedElement(int dep, int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int range, int type)
+{
+    int i, tx, ty, count = 0;
+    coord tpos;
+    if (map[pos.y][pos.x] == type)
+        count = 1;
+    if (dep == 0)
+    {
+        memset(g, 0, sizeof(g));
+        g[pos.y][pos.x] = TRUE;
+    }
+    if (dep == range)
+        return count;
+    for (i = 0; i < 4; ++i)
+    {
+        tpos = coordMove(pos, i);
+        if (!g[tpos.y][tpos.x] && checkDirection(map, pos, i))
+        {
+            g[tpos.y][tpos.x] = TRUE;
+            count += countElement(dep + 1, map, tpos, range, type);
+        }
+    }
+    return count;
+}
+

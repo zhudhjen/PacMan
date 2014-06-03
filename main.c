@@ -315,36 +315,53 @@ void handleGhostRight(int i) {
     ghost[i].mapX++;
 }
 
-void changeGhostDir(int i) {
+void changeGhostDir(int index) {
   int dir[4];
-  int j;
-  if ((int)ghost[i].screenX == mapToscreen(ghost[i].mapX) + UNIT / 2 && (int)ghost[i].screenY == mapToscreen(ghost[i].mapY) + UNIT / 2) {
-    int flag = 0;
-    switch (ghost[i].dir) {
+  int i;
+  int flag = 0;
+  if ((int)ghost[index].screenX == mapToscreen(ghost[index].mapX) + UNIT / 2 && (int)ghost[index].screenY == mapToscreen(ghost[index].mapY) + UNIT / 2) {
+    /* 判断前方是否是死路
+    */
+    switch (ghost[index].dir) {
       case UP:
-          if (map[ghost[i].mapY - 1][ghost[i].mapX] != 0)
+          if (map[ghost[index].mapY - 1][ghost[index].mapX] == 0)
             flag++;
           break;
       case DOWN:
-          if (map[ghost[i].mapY + 1][ghost[i].mapX] != 0)
+          if (map[ghost[index].mapY + 1][ghost[index].mapX] == 0)
             flag++;
           break;
       case LEFT:
-          if (map[ghost[i].mapY][ghost[i].mapX - 1] != 0)
+          if (map[ghost[index].mapY][ghost[index].mapX - 1] == 0)
             flag++;
           break;
       case RIGHT:
-          if (map[ghost[i].mapY][ghost[i].mapX + 1] != 0)
+          if (map[ghost[index].mapY][ghost[index].mapX + 1] == 0)
             flag++;
           break;
     }
-    if (flag >= 3) {
-      coord ghostPos;
-      ghostPos.x = ghost[i].mapX;
-      ghostPos.y = ghost[i].mapY;
-      for (j = 0; j < 4; j++)
-        dir[j] = ghost[j].dir;
-      ghost[i].dir = moveAI(&ghost[i].ai, map, &ghostPos, dir, pacman.mapX, pacman.mapY, ghost[i].burst);
+    /* 判断是否是路口
+    */
+
+    if (map[ghost[index].mapY - 1][ghost[index].mapX] != 0)
+      flag++;
+    if (map[ghost[index].mapY + 1][ghost[index].mapX] != 0)
+      flag++;
+    if (map[ghost[index].mapY][ghost[index].mapX - 1] != 0)
+      flag++;
+    if (map[ghost[index].mapY][ghost[index].mapX + 1] != 0)
+      flag++;
+
+    outtextxy(170,3,numToString(flag));
+    if (flag) {
+      coord ghostPos[4];
+      for (i = 0; i < 4; i++)
+      {
+        ghostPos[i].x = ghost[i].mapX;
+        ghostPos[i].y = ghost[i].mapY;
+        dir[i] = ghost[i].dir;
+      }
+      ghost[index].dir = moveAI(&ghost[index].ai, map, ghostPos, dir, pacman.mapX, pacman.mapY, ghost[index].burst);
     } 
   }
 }
@@ -432,19 +449,19 @@ void process() {
     eventHandler();
 
   /* test code
-  
+  */
     setcolor(EGA_BLACK);
     _fill_color = BLACK;
     bar(0,0,300,20);
     floodfill(10,10,BLACK);
     setcolor(GREEN);
     settextstyle(1,0,6);
-    outtextxy(20,3,numToString(pacman.mapX));
-    outtextxy(70,3,numToString(pacman.mapY));
-    outtextxy(90,3,numToString(map[pacman.mapY][pacman.mapX - 1]));
-    outtextxy(120,3,numToString(pacman.screenX));
-    outtextxy(170,3,numToString(pacman.screenY));
-  test code End
+    outtextxy(20,3,numToString(ghost[0].dir));
+    outtextxy(70,3,numToString(ghost[1].dir));
+    outtextxy(90,3,numToString(ghost[2].dir));
+    outtextxy(120,3,numToString(ghost[3].dir));
+    // outtextxy(170,3,numToString(pacman.screenY));
+  /* test code End
   */
     timeCounter = (timeCounter + 1) % 10000;
   }

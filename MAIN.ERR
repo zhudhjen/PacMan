@@ -1,5 +1,11 @@
 draw.h(7): Error! E1055: Unable to open 'graphics.h'
 draw.h(12): Warning! W138: No newline at end of file
+draw.c(570): Warning! W138: No newline at end of file
+main.c(488): Warning! W107: Missing return value for function 'main'
+main.c(488): Warning! W138: No newline at end of file
+draw.c(570): Warning! W138: No newline at end of file
+main.c(505): Warning! W107: Missing return value for function 'main'
+main.c(505): Warning! W138: No newline at end of file
 draw.c(29): Error! E1011: Symbol 'VESA_1024x768x8bit' has not been declared
 draw.c(30): Warning! W131: No prototype found for function 'initgraph'
 draw.c(31): Warning! W131: No prototype found for function 'cleardevice'
