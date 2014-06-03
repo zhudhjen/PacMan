@@ -8,6 +8,7 @@
 #include "var.h"
 #include "coord.h"
 
+typedef struct tagClassAI classAI;
 struct tagClassAI {
     //move the monsters
     int (*move)(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH],

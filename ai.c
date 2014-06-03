@@ -14,15 +14,9 @@ int moveAI (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int 
 bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int direction)
 {
     coord newPos = coordMove(pos, direction);
-    printf("checking: (%d, %d) %d", pos.x, pos.y, direction);
-    // printf("checking: (%d, %d) %d", pos.x, pos.y, direction);
     if ((map[newPos.y][newPos.x] == 0)||
         (map[pos.y][pos.x] != 4 && map[newPos.y][newPos.x] == 4))
-        printf(": FALSE\n");
-    {
-        // printf(": FALSE\n");
         return FALSE;
-    }
     else
         return TRUE;
 }
@@ -84,7 +78,7 @@ double countWeightedElement(int dep, int map[MAP_HEIGHT][MAP_WIDTH], coord pos, 
     double count = 0;
     coord tpos;
     if (map[pos.y][pos.x] == type)
-        count = range / dep;
+        count = range * exp(-dep);
     if (dep == 0)
     {
         memset(g, 0, sizeof(g));

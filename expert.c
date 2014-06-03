@@ -24,9 +24,9 @@ int expertMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
                 checkDirection(map, ghostPos[this->index], i))
         {
             ghostDir[this->index] = i;
-            memcpy(hmap[0], map, sizeof(map));
-            memcpy(hghostPos[0], ghostPos, sizeof(ghostPos));
-            memcpy(hghostDir[0], ghostDir, sizeof(ghostDir));
+            memcpy(hmap[0], map, MAP_WIDTH*MAP_HEIGHT*sizeof(int));
+            memcpy(hghostPos[0], ghostPos, 4*sizeof(int));
+            memcpy(hghostDir[0], ghostDir, 4*sizeof(int));
             eval = deepEval(0, 0, this, hmap[0], hghostPos[0], hghostDir[0], PacPos, burst, 0);
             if (eval > maxe)
             {
@@ -41,11 +41,10 @@ int expertMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
 double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH],
         coord *ghostPos, int *ghostDir, coord PacPos, int burst, double burstRate)
 {
-    int i, j, turn, count = 0, total = 0, frameGone = 0;
-    bool flag, dir[4];
+    int i, j, turn, count = 0, total = 0, frameGone = 0, dir;
+    bool flag;
     double averDist, eval, maxe = 0;
 
-    printf("deelEval\n");
     //search for a length of 10 blocks
     if (frame * this->aiSpeed >= 10 || dep>=5)
     {
@@ -71,23 +70,19 @@ double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH
         {            
             count = 0;
             for (j = 0; j < 4; ++j)     //for each direction
-            {
-                dir[j] = FALSE;                
-                if (checkDirection(map, ghostPos[i], j))
+                if ((j + ghostDir[i]) % 4 != 1 && 
+                        checkDirection(map, ghostPos[i], j))
                 {
                     count++;
-                    if ((dir[j] + ghostDir[i]) % 4 != 1)
-                    {
-                        ghostDir[i] = j;
-                        dir[j] = TRUE;
-                    }
+                    dir = j;
                 } 
-            }
-            if (count >= 3)
+            if (count >= 2)
             {
                 flag = FALSE;
                 turn = i;
             }
+            else
+                ghostDir[i] = dir;
         }
 
         //move them if each ghost has its only move direction
@@ -95,7 +90,7 @@ double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH
         {
             frameGone += floor(1 / this->aiSpeed);
             for (i = 0; i < 4; ++i)
-                ghostPos[i] = coordMove(ghostPos[i], i);
+                ghostPos[i] = coordMove(ghostPos[i], ghostDir[i]);
         }
     }
     burst = max(0, burst - frameGone);
@@ -113,9 +108,9 @@ double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH
                 checkDirection(map, ghostPos[this->index], i))
         {
             ghostDir[turn] = i;
-            memcpy(hmap[dep + 1], map, sizeof(map));
-            memcpy(hghostPos[dep + 1], ghostPos, sizeof(ghostPos));
-            memcpy(hghostDir[dep + 1], ghostDir, sizeof(ghostDir));
+            memcpy(hmap[dep + 1], map, MAP_WIDTH*MAP_HEIGHT*sizeof(int));
+            memcpy(hghostPos[dep + 1], ghostPos, 4*sizeof(int));
+            memcpy(hghostDir[dep + 1], ghostDir, 4*sizeof(int));
             eval = deepEval(dep + 1, frame + frameGone, this, hmap[dep + 1],
                     hghostPos[dep + 1], hghostDir[dep + 1], PacPos, burst, burstRate);
             if (eval > maxe)

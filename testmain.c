@@ -1,5 +1,6 @@
 #include "coord.h"
 #include "ai.h"
+#include "fool.h"
 #include "expert.h"
 
 int map[32][28] = {
@@ -37,8 +38,8 @@ int map[32][28] = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 };
 
-coord ghostPos[4] = {{13,14},{14,15},{15,15},{16,15}};
-int ghostDir[4] = {0};
+coord ghostPos[4] = {{13,15},{14,15},{15,15},{16,15}};
+int ghostDir[4] = {0, 0, 0, 0};
 
 int main()
 {
