@@ -20,6 +20,10 @@ int foolMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, in
     int i;
     for (i = 0; i < 4; ++i)
     {
+        printf("%d: %d, %d  dir = %d\n", ghostPos[i].x, ghostPos[i].y, ghostDir[i]);
+    }
+    for (i = 0; i < 4; ++i)
+    {
         if ((i + ghostDir[this->index]) % 4 != 1 &&
            checkDirection(map, ghostPos[this->index], i))
             access[i] = TRUE;
