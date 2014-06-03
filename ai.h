@@ -11,16 +11,26 @@
 typedef struct tagClassAI classAI;
 struct tagClassAI {
     //move the monsters
-    int (*move)(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst);
-    
+    int (*move)(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH],
+    		coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst);
     double aiSpeed, playerSpeed;
     int index;
 };
 
-int moveAI(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst);
+//call the function pointer which is initialized by the certain constructor
+int moveAI(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], 
+		coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst);
 
-bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int direction);
+//check whether the given direction can be walked through
+bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH],
+		coord pos, int direction);
 
-int getDistance(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, coord goal, int direction);
+//get the distance from pos to goal from the given direction
+int getDistance(int map[MAP_HEIGHT][MAP_WIDTH],
+		coord pos, coord goal, int direction);
+
+//count how many points of given type in given distance within the range
+int countElement(int map[MAP_HEIGHT][MAP_WIDTH],
+		coord pos, int range, int type);
 
 #endif /* _AI_H_ */

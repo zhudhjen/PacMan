@@ -70,3 +70,30 @@ int getDistance(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, coord goal, int direc
     }
     return -1;
 }
+
+//calculate the weighted distance of points of a given type in a given range
+int countWeightedElement(int dep, int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int range, int type)
+{
+    int i, tx, ty, count = 0;
+    coord tpos;
+    if (map[pos.y][pos.x] == type)
+        count = 1;
+    if (dep == 0)
+    {
+        memset(g, 0, sizeof(g));
+        g[pos.y][pos.x] = TRUE;
+    }
+    if (dep == range)
+        return count;
+    for (i = 0; i < 4; ++i)
+    {
+        tpos = coordMove(pos, i);
+        if (!g[tpos.y][tpos.x] && checkDirection(map, pos, i))
+        {
+            g[tpos.y][tpos.x] = TRUE;
+            count += countElement(dep + 1, map, tpos, range, type);
+        }
+    }
+    return count;
+}
+

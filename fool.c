@@ -5,11 +5,9 @@
 extern void foolConstruct (classAI *this, double ai_speed, double player_speed, int ai_index)
 {
     this->move = foolMove;
-
     this->aiSpeed = ai_speed;
     this->playerSpeed = player_speed;
     this->index = ai_index;
-    printf("AI 'fool' constructed. \n");
     srand(time(0));
 }
 

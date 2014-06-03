@@ -8,11 +8,9 @@ coord hghostPos[20][4];
 extern void expertConstruct (classAI *this, double ai_speed, double player_speed, int ai_index)
 {
     this->move = expertMove;
-
     this->aiSpeed = ai_speed;
     this->playerSpeed = player_speed;
     this->index = ai_index;
-    printf("AI 'expert' constructed. \n");
     srand(time(0));
 }
 
@@ -101,6 +99,7 @@ double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH
         }
     }
     burst = max(0, burst - frameGone);
+
     //search for the following moving
     for (int i = 0; i < 4; ++i)
         if ((i + ghostDir[this->index]) % 4 != 1 &&
@@ -111,7 +110,7 @@ double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH
             memcpy(hghostPos[dep + 1], ghostPos, sizeof(ghostPos));
             memcpy(hghostDir[dep + 1], ghostDir, sizeof(ghostDir));
             eval = deepEval(dep + 1, frame + frameGone, this, ind, hmap[dep + 1],
-                    hghostPos[dep + 1], hghostDir[dep + 1], PacPos, burst, br);
+                    hghostPos[dep + 1], hghostDir[dep + 1], PacPos, burst, burstRate);
             if (eval[i] > maxe)
             {
 
