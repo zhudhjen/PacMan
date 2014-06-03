@@ -34,12 +34,12 @@ void drawWelcomePage(int smode)
   {
     case 0:
     {
-          setcolor(0xC0);
-          rectangle(220,200,340,230);
-          _fill_color=0xC0;
-          floodfill(290,215,0xC0);
-          setcolor(WHITE);
-          outtextxy(230,210,"Stupid Enemy");
+      setcolor(0xC0);
+      rectangle(220,200,340,230);
+      _fill_color=0xC0;
+      floodfill(290,215,0xC0);
+      setcolor(WHITE);
+      outtextxy(230,210,"Stupid Enemy");
       setcolor(WHITE);
       outtextxy(230,300,"Average Enemy");
       outtextxy(230,390,"Cruel Enemy");
@@ -48,11 +48,11 @@ void drawWelcomePage(int smode)
     case 1:
     {
       setcolor(0xC0);
-          rectangle(220,290,340,320);
-          _fill_color=0xC0;
-          floodfill(290,300,0xC0);
-          setcolor(WHITE);
-          outtextxy(230,300,"Average Enemy");
+      rectangle(220,290,340,320);
+      _fill_color=0xC0;
+      floodfill(290,300,0xC0);
+      setcolor(WHITE);
+      outtextxy(230,300,"Average Enemy");
       setcolor(WHITE);
       outtextxy(230,210,"Stupid Enemy");
       outtextxy(230,390,"Cruel Enemy");
@@ -61,11 +61,11 @@ void drawWelcomePage(int smode)
     case 2:
     {
       setcolor(0xC0);
-          rectangle(220,380,340,410);
-          _fill_color=0xC0;
-          floodfill(290,400,0xC0);
-          setcolor(WHITE);
-          outtextxy(230,390,"Cruel Enemy");
+      rectangle(220,380,340,410);
+      _fill_color=0xC0;
+      floodfill(290,400,0xC0);
+      setcolor(WHITE);
+      outtextxy(230,390,"Cruel Enemy");
       setcolor(WHITE);
       outtextxy(230,210,"Stupid Enemy");
       outtextxy(230,300,"Average Enemy");
