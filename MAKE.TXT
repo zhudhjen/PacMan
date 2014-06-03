@@ -2,28 +2,15 @@ Open Watcom Make Version 1.9
 Portions Copyright (c) 1988-2002 Sybase, Inc. All Rights Reserved.
 Source code is available under the Sybase Open Watcom Public License.
 See http://www.openwatcom.org/ for details.
-	wcc386  fool.c
+	wcc386  expert.c
 Open Watcom C32 Optimizing Compiler Version 1.9
 Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
 Source code is available under the Sybase Open Watcom Public License.
 See http://www.openwatcom.org/ for details.
-fool.c: 33 lines, included 2277, 0 warnings, 0 errors
-Code size: 367
-	wcc386  normal.c
-Open Watcom C32 Optimizing Compiler Version 1.9
-Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
-Source code is available under the Sybase Open Watcom Public License.
-See http://www.openwatcom.org/ for details.
-normal.c: 56 lines, included 2277, 0 warnings, 0 errors
-Code size: 627
-	wcc386  testmain.c
-Open Watcom C32 Optimizing Compiler Version 1.9
-Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
-Source code is available under the Sybase Open Watcom Public License.
-See http://www.openwatcom.org/ for details.
-testmain.c: 54 lines, included 2136, 0 warnings, 0 errors
-Code size: 270
-	wlink option quiet name test.exe file { ai.obj fool.obj normal.obj testmain.obj }
+expert.c(124): Warning! W138: No newline at end of file
+expert.c: 124 lines, included 2302, 1 warnings, 0 errors
+Code size: 1622
+	wlink option quiet name test.exe file { ai.obj fool.obj normal.obj expert.obj testmain.obj }
 Warning! W1027: file fool.obj(C:\WATCOM\PACMAN\fool.c): redefinition of newCoord_ ignored
 Warning! W1027: file fool.obj(C:\WATCOM\PACMAN\fool.c): redefinition of coordMove_ ignored
 Warning! W1027: file fool.obj(C:\WATCOM\PACMAN\fool.c): redefinition of _dx ignored
@@ -32,6 +19,10 @@ Warning! W1027: file normal.obj(C:\WATCOM\PACMAN\normal.c): redefinition of newC
 Warning! W1027: file normal.obj(C:\WATCOM\PACMAN\normal.c): redefinition of coordMove_ ignored
 Warning! W1027: file normal.obj(C:\WATCOM\PACMAN\normal.c): redefinition of _dx ignored
 Warning! W1027: file normal.obj(C:\WATCOM\PACMAN\normal.c): redefinition of _dy ignored
+Warning! W1027: file expert.obj(C:\WATCOM\PACMAN\expert.c): redefinition of newCoord_ ignored
+Warning! W1027: file expert.obj(C:\WATCOM\PACMAN\expert.c): redefinition of coordMove_ ignored
+Warning! W1027: file expert.obj(C:\WATCOM\PACMAN\expert.c): redefinition of _dx ignored
+Warning! W1027: file expert.obj(C:\WATCOM\PACMAN\expert.c): redefinition of _dy ignored
 Warning! W1027: file testmain.obj(C:\WATCOM\PACMAN\testmain.c): redefinition of newCoord_ ignored
 Warning! W1027: file testmain.obj(C:\WATCOM\PACMAN\testmain.c): redefinition of coordMove_ ignored
 Warning! W1027: file testmain.obj(C:\WATCOM\PACMAN\testmain.c): redefinition of _dx ignored

@@ -10,6 +10,6 @@ static int expertMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH],
 		coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst);
 
 double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], 
-		coord *ghostPos, coord PacPos, int burst, double burstRate)
+		coord *ghostPos, int *ghostDir, coord PacPos, int burst, double burstRate);
 
 #endif /*_EXPERT_H_*/

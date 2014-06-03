@@ -30,7 +30,7 @@ int getDistance(int map[MAP_HEIGHT][MAP_WIDTH],
 		coord pos, coord goal, int direction);
 
 //count how many points of given type in given distance within the range
-int countElement(int map[MAP_HEIGHT][MAP_WIDTH],
+double countWeightedElement(int dep, int map[MAP_HEIGHT][MAP_WIDTH],
 		coord pos, int range, int type);
 
 #endif /* _AI_H_ */
