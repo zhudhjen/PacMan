@@ -1,0 +1,7 @@
+ai.c(9): Warning! E1176: Parameter 1, pointer type mismatch
+ai.c(9): Note! I2003: source conversion type is 'classAI *'
+ai.c(9): Note! I2004: target conversion type is 'struct classAI *'
+draw.h(12): Warning! W138: No newline at end of file
+draw.c(569): Warning! W138: No newline at end of file
+main.c(477): Warning! W107: Missing return value for function 'main'
+main.c(477): Warning! W138: No newline at end of file
