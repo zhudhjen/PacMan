@@ -2,6 +2,9 @@
 #include "expert.h"
 #include <time.h>
 
+int hghostDir[20][4], hmap[20][MAP_HEIGHT][MAP_WIDTH];
+coord hghostPos[20][4];
+
 extern void expertConstruct (classAI *this, double ai_speed, double player_speed, int ai_index)
 {
     this->move = expertMove;
@@ -15,41 +18,38 @@ extern void expertConstruct (classAI *this, double ai_speed, double player_speed
 
 int expertMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst)
 {
-    double maxe, eval[4];
     int decision, tmp, ind = this->index;
+    double maxe, eval;
     coord PacPos = newCoord(floor(pacPosX), floor(pacPosY));
     for (i = 0; i < 4; ++i)
         if ((i + ghostDir[this->index]) % 4 != 1 &&
                 checkDirection(map, ghostPos[this->index], i))
         {
-            memcpy(tmap, bbs map, sizeof(map));
-            memcpy(tghostPos, ghostPos, sizeof(ghostPos));
-            memcpy(tghostDir, ghostDir, sizeof(ghostDir));
-            time = 0;
-            tburst = burst;
-            burstRate = 0;
-            tmp = ghostDir[ind];
-            ghostDir[ind] = i;
-            eval[i] = deepEval(&time, this, ind, tmap, tghostPos, tghostDir, PacPos, &tburst);
-            if (eval[i] > maxe)
+            frame = 0;
+            ghostDir[this->index] = i;
+            memcpy(hmap[0], map, sizeof(map));
+            memcpy(hghostPos[0], ghostPos, sizeof(ghostPos));
+            memcpy(hghostDir[0], ghostDir, sizeof(ghostDir));
+            eval = deepEval(0, frame, this, ind, hmap[0], hghostPos[0], hghostDir[0], PacPos, burst, 0);
+            if (eval > maxe)
+            {
+                maxe = eval;
                 decision = i;
-            ghostDir[ind] = tmp;
+            }
         }
     return decision;
 }
 
 //The dfs function, returning the evaluation of the situation
-double deepEval(int time, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, coord PacPos, int *burst)
+double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH],
+        coord *ghostPos, coord PacPos, int burst, double burstRate)
 {
-    int tburst, count = 0, i, total = 0, timeGone = 0;
-    int tmap[MAP_HEIGHT][MAP_WIDTH];
-    coord tmp, tghostPos[4];
-    int tghostDir[4];
+    int turn, count = 0, i, total = 0, frameGone = 0;
     bool flag, dir[4];
-    double val;
+    double val, eval[4];
 
     //search for a length of 10 blocks
-    if (time >= 10 / this->aiSpeed)
+    if (frame * this->aiSpeed >= 10 || dep>=20)
     {
         for (j = 0; j < 4; ++j)
             for (i = 0; i < 4; ++i)
@@ -69,10 +69,10 @@ double deepEval(int time, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *
     while (flag)
     {
         //check whether there is any ghost who has any choice
-        for (i = 0; i < 4; ++i)
+        for (i = 0; i < 4; ++i)     //for each ghost
         {            
             count = 0;
-            for (j = 0; j < 4; ++j)
+            for (j = 0; j < 4; ++j)     //for each direction
             {
                 dir[j] = FALSE;                
                 if (checkDirection(ghostPos[i], j))
@@ -95,23 +95,26 @@ double deepEval(int time, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *
         //move them if each ghost has its only move direction
         if (flag)
         {
-            timeGone += this->aiSpeed;
+            frameGone += floor(1 / this->aiSpeed);
             for (i = 0; i < 4; ++i)
                 ghostPos[i] = coordMove(ghostPos[i], i);
         }
     }
-
+    burst = max(0, burst - frameGone);
     //search for the following moving
     for (int i = 0; i < 4; ++i)
         if ((i + ghostDir[this->index]) % 4 != 1 &&
                 checkDirection(map, ghostPos[this->index], i))
         {
-            burstRate = 0;
-            tmp = ghostDir[ind];
-            ghostDir[ind] = i;
-            eval[i] = deepEval(0, ind, map, ghostPos, ghostDir, PacPos, burst);
+            ghostDir[turn] = i;
+            memcpy(hmap[dep + 1], map, sizeof(map));
+            memcpy(hghostPos[dep + 1], ghostPos, sizeof(ghostPos));
+            memcpy(hghostDir[dep + 1], ghostDir, sizeof(ghostDir));
+            eval = deepEval(dep + 1, frame + frameGone, this, ind, hmap[dep + 1],
+                    hghostPos[dep + 1], hghostDir[dep + 1], PacPos, burst, br);
             if (eval[i] > maxe)
-                decision = i;
-            ghostDir[ind] = tmp;
+            {
+
+            }
         }
 }

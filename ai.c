@@ -4,11 +4,13 @@ coord queue[1000];
 int depth[1000];
 bool g[MAP_HEIGHT][MAP_WIDTH];
 
+//call the function pointer which is initialized by the certain constructor
 int moveAI (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst)
 {
     return this->move(this, map, ghostPos, ghostDir, pacPosX, pacPosY, burst);
 }
 
+//check whether the given direction can be walked through
 bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int direction)
 {
     coord newPos = coordMove(pos, direction);
@@ -19,6 +21,7 @@ bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int direction)
         return TRUE;
 }
 
+//get the distance from pos to goal from the given direction
 int getDistance(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, coord goal, int direction)
 {
     coord cur, tmp;
