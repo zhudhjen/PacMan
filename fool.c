@@ -18,7 +18,7 @@ int foolMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord ghostPos[4], 
     int i, decision;
     for (i = 0; i < 4; ++i)
     {
-        printf("%d: (%d, %d)  dir = %d\n", ghostPos[i].x, ghostPos[i].y, ghostDir[i]);
+        printf("%d: (%d, %d)  dir = %d\n", i, ghostPos[i].x, ghostPos[i].y, ghostDir[i]);
     }
     for (i = 0; i < 4; ++i)
     {
