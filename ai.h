@@ -11,13 +11,13 @@
 typedef struct tagClassAI classAI;
 struct tagClassAI {
     //move the monsters
-    int (*move)(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst);
+    int (*move)(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord ghostPos[4], int ghostDir[4], double pacPosX, double pacPosY, int burst);
     
     double aiSpeed, playerSpeed;
     int index;
 };
 
-int moveAI(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst);
+int moveAI(classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord ghostPos[4], int ghostDir[4], double pacPosX, double pacPosY, int burst);
 
 bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int direction);
 

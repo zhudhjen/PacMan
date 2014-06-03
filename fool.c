@@ -12,11 +12,10 @@ extern void foolConstruct (classAI *this, double ai_speed, double player_speed, 
     srand(time(0));
 }
 
-int foolMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst)
+int foolMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord ghostPos[4], int ghostDir[4], double pacPosX, double pacPosY, int burst)
 {
     bool access[4];
-    int decision;
-    int i;
+    int i, decision;
     for (i = 0; i < 4; ++i)
     {
         printf("%d: (%d, %d)  dir = %d\n", ghostPos[i].x, ghostPos[i].y, ghostDir[i]);
