@@ -7,11 +7,6 @@ typedef struct {
     int x,y;
 } coord;
 
-int tp(coord pos)
-{
-	return pos.y * MAP_WIDTH + pos.x;
-}
-
 coord newCoord(int nx, int ny)
 {
 	coord pos;

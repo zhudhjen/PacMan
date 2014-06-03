@@ -15,10 +15,14 @@ bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int direction)
 {
     coord newPos = coordMove(pos, direction);
     printf("checking: (%d, %d) %d", pos.x, pos.y, direction);
+    // printf("checking: (%d, %d) %d", pos.x, pos.y, direction);
     if ((map[newPos.y][newPos.x] == 0)||
         (map[pos.y][pos.x] != 4 && map[newPos.y][newPos.x] == 4))
         printf(": FALSE\n");
+    {
+        // printf(": FALSE\n");
         return FALSE;
+    }
     else
         return TRUE;
 }
@@ -74,12 +78,13 @@ int getDistance(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, coord goal, int direc
 }
 
 //calculate the weighted distance of points of a given type in a given range
-int countWeightedElement(int dep, int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int range, int type)
+double countWeightedElement(int dep, int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int range, int type)
 {
-    int i, tx, ty, count = 0;
+    int i, tx, ty;
+    double count = 0;
     coord tpos;
     if (map[pos.y][pos.x] == type)
-        count = 1;
+        count = range / dep;
     if (dep == 0)
     {
         memset(g, 0, sizeof(g));
@@ -93,7 +98,7 @@ int countWeightedElement(int dep, int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int
         if (!g[tpos.y][tpos.x] && checkDirection(map, pos, i))
         {
             g[tpos.y][tpos.x] = TRUE;
-            count += countElement(dep + 1, map, tpos, range, type);
+            count += countWeightedElement(dep + 1, map, tpos, range, type);
         }
     }
     return count;

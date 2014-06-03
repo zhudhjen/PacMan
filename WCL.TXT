@@ -1,0 +1,42 @@
+Open Watcom C/C++32 Compile and Link Utility Version 1.9
+Portions Copyright (c) 1988-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+	wcc386 TESTMAIN.C 
+Open Watcom C32 Optimizing Compiler Version 1.9
+Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+TESTMAIN.C: 54 lines, included 2136, 0 warnings, 0 errors
+Code size: 270
+	wcc386 AI.C 
+Open Watcom C32 Optimizing Compiler Version 1.9
+Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+AI.C: 69 lines, included 2039, 0 warnings, 0 errors
+Code size: 828
+	wcc386 NORMAL.C 
+Open Watcom C32 Optimizing Compiler Version 1.9
+Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+NORMAL.C: 56 lines, included 2277, 0 warnings, 0 errors
+Code size: 627
+Unable to open "coord.c"
+	wlink @__wcl__.lnk
+Open Watcom Linker Version 1.9
+Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
+Source code is available under the Sybase Open Watcom Public License.
+See http://www.openwatcom.org/ for details.
+loading object files
+Warning! W1027: file AI.obj(C:\WATCOM\PACMAN\AI.C): redefinition of newCoord_ ignored
+Warning! W1027: file AI.obj(C:\WATCOM\PACMAN\AI.C): redefinition of coordMove_ ignored
+Warning! W1027: file AI.obj(C:\WATCOM\PACMAN\AI.C): redefinition of _dx ignored
+Warning! W1027: file AI.obj(C:\WATCOM\PACMAN\AI.C): redefinition of _dy ignored
+Warning! W1027: file NORMAL.obj(C:\WATCOM\PACMAN\NORMAL.C): redefinition of newCoord_ ignored
+Warning! W1027: file NORMAL.obj(C:\WATCOM\PACMAN\NORMAL.C): redefinition of coordMove_ ignored
+Warning! W1027: file NORMAL.obj(C:\WATCOM\PACMAN\NORMAL.C): redefinition of _dx ignored
+Warning! W1027: file NORMAL.obj(C:\WATCOM\PACMAN\NORMAL.C): redefinition of _dy ignored
+searching libraries
+creating a DOS/4G executable
