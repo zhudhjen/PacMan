@@ -14,11 +14,11 @@ int moveAI (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int 
 bool checkDirection(int map[MAP_HEIGHT][MAP_WIDTH], coord pos, int direction)
 {
     coord newPos = coordMove(pos, direction);
-    printf("checking: (%d, %d) %d", pos.x, pos.y, direction);
+    // printf("checking: (%d, %d) %d", pos.x, pos.y, direction);
     if ((map[newPos.y][newPos.x] == 0)||
         (map[pos.y][pos.x] != 4 && map[newPos.y][newPos.x] == 4))
     {
-        printf(": FALSE\n");
+        // printf(": FALSE\n");
         return FALSE;
     }
     else
