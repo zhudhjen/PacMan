@@ -46,6 +46,7 @@ struct Global {
   int score;
   int life;
   int gameover;
+  int dou;
 } global;
 
 struct Pacman {
@@ -136,12 +137,13 @@ int welcomePage() {
 void gameInitial() {
   int i;
   initMap(map);
+  drawInfo(global.score, global.life);
   pacman.mapX = 14;
   pacman.mapY = 18;  
   pacman.screenX = 14 * UNIT + UNIT / 2 + OFFSET;
   pacman.screenY = 18 * UNIT + UNIT / 2 + OFFSET;
   pacman.dir = UP;
-  pacman.speed = 0.6;
+  pacman.speed = 1.2;
   drawPacman((int)pacman.screenX, (int)pacman.screenY, pacman.dir);
   for (i = 0; i < 3; i++) {
     ghost[i].mapX = 12 + i * 2;
@@ -150,7 +152,7 @@ void gameInitial() {
     ghost[i].screenY = mapToscreen(16);
     ghost[i].dir = UP;
     ghost[i].burst = 0;
-    ghost[i].speed = 0.4;
+    ghost[i].speed = 0.9;
     drawGhost(i, (int)ghost[i].screenX, (int)ghost[i].screenY, ghost[i].dir, ghost[i].burst);
   }
   ghost[3].mapX = 14;
@@ -314,6 +316,8 @@ void handleGhostRight(int i) {
 }
 
 void changeGhostDir(int i) {
+  int dir[4];
+  int j;
   if ((int)ghost[i].screenX == mapToscreen(ghost[i].mapX) + UNIT / 2 && (int)ghost[i].screenY == mapToscreen(ghost[i].mapY) + UNIT / 2) {
     int flag = 0;
     switch (ghost[i].dir) {
@@ -338,7 +342,9 @@ void changeGhostDir(int i) {
       coord ghostPos;
       ghostPos.x = ghost[i].mapX;
       ghostPos.y = ghost[i].mapY;
-      ghost[i].dir = moveAI(&ghost[i].ai, map, &ghostPos, &ghost[i].dir, pacman.mapX, pacman.mapY, ghost[i].burst);
+      for (j = 0; j < 4; j++)
+        dir[j] = ghost[j].dir;
+      ghost[i].dir = moveAI(&ghost[i].ai, map, &ghostPos, dir, pacman.mapX, pacman.mapY, ghost[i].burst);
     } 
   }
 }
@@ -375,16 +381,20 @@ void eventHandler() {
   */
   if (map[pacman.mapY][pacman.mapX] == 1) {
     global.score += 10;
+    global.dou--;
     map[pacman.mapY][pacman.mapX] = 2;
+    drawInfo(global.score, global.life);
   }
   /* 判断吃救命豆事件
   */
   if (map[pacman.mapY][pacman.mapX] == 3) {
     global.score += 15;
+    global.dou--;
     map[pacman.mapY][pacman.mapX] = 2;
     for (i = 0; i < 4; i++) {
-      ghost[i].burst = 1000;
+      ghost[i].burst = 1200;
     }
+    drawInfo(global.score, global.life);
   }
   /* 判定 Ghost 与 pacman 相撞事件
   */
@@ -404,10 +414,11 @@ void eventHandler() {
         ghost[i].screenY = 16 * UNIT + UNIT / 2 + OFFSET;
         ghost[i].dir = UP;
         ghost[i].burst = 0;
+        drawInfo(global.score, global.life);
       }
     }
   }
-  if (global.life == 0)
+  if (global.life <= 0)
     global.gameover = 1;
 }
 
@@ -415,14 +426,13 @@ void process() {
   static int timeCounter = 0,
              actionFlag = 0;
 
-  if (timeCounter % 3 == 0) {
+  if (timeCounter % 2000 == 0) {
     pacmanRound();
     ghostRound();
     eventHandler();
-    drawInfo(global.score, global.life);
 
   /* test code
-  */ 
+  
     setcolor(EGA_BLACK);
     _fill_color = BLACK;
     bar(0,0,300,20);
@@ -434,7 +444,7 @@ void process() {
     outtextxy(90,3,numToString(map[pacman.mapY][pacman.mapX - 1]));
     outtextxy(120,3,numToString(pacman.screenX));
     outtextxy(170,3,numToString(pacman.screenY));
-  /* test code End
+  test code End
   */
     timeCounter = (timeCounter + 1) % 10000;
   }
@@ -448,6 +458,7 @@ int main() {
   global.score = 0;
   global.life = 2;
   global.gameover = 0;
+  global.dou = 310;
   gameInitial();
 
   /* initialize ai

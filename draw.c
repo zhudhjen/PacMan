@@ -29,49 +29,46 @@ void drawWelcomePage(int smode)
    int driver=0, mode=VESA_1024x768x8bit;
    initgraph(&driver, &mode, "");
    cleardevice();
-   setcolor(WHITE);
-   rectangle(0,0,32*20,28*20);
-   floodfill(200,115,WHITE);
-   load_8bit_bmp(0,0,"pacman.bmp");
+   load_8bit_bmp(60,0,"pacman.bmp");
   switch(smode)
   {
     case 0:
     {
           setcolor(0xC0);
-          rectangle(220,100,340,130);
+          rectangle(220,200,340,230);
           _fill_color=0xC0;
-          floodfill(290,115,0xC0);
+          floodfill(290,215,0xC0);
           setcolor(WHITE);
-          outtextxy(230,110,"Stupid Enemy");
-      setcolor(BLACK);
-      outtextxy(230,200,"Average Enemy");
-      outtextxy(230,290,"Cruel Enemy");
+          outtextxy(230,210,"Stupid Enemy");
+      setcolor(WHITE);
+      outtextxy(230,300,"Average Enemy");
+      outtextxy(230,390,"Cruel Enemy");
       break;
     }
     case 1:
     {
       setcolor(0xC0);
-          rectangle(220,190,340,220);
+          rectangle(220,290,340,320);
           _fill_color=0xC0;
-          floodfill(290,200,0xC0);
+          floodfill(290,300,0xC0);
           setcolor(WHITE);
-          outtextxy(230,200,"Average Enemy");
-      setcolor(BLACK);
-      outtextxy(230,110,"Stupid Enemy");
-      outtextxy(230,290,"Cruel Enemy");
+          outtextxy(230,300,"Average Enemy");
+      setcolor(WHITE);
+      outtextxy(230,210,"Stupid Enemy");
+      outtextxy(230,390,"Cruel Enemy");
       break;
     }
     case 2:
     {
       setcolor(0xC0);
-          rectangle(220,280,340,310);
+          rectangle(220,380,340,410);
           _fill_color=0xC0;
-          floodfill(290,300,0xC0);
+          floodfill(290,400,0xC0);
           setcolor(WHITE);
-          outtextxy(230,290,"Cruel Enemy");
-      setcolor(BLACK);
-      outtextxy(230,110,"Stupid Enemy");
-      outtextxy(230,200,"Average Enemy");
+          outtextxy(230,390,"Cruel Enemy");
+      setcolor(WHITE);
+      outtextxy(230,210,"Stupid Enemy");
+      outtextxy(230,300,"Average Enemy");
     }
     
   }
@@ -195,12 +192,12 @@ void drawInfo(int score, int up)
 {
    setcolor(EGA_BLACK);
    _fill_color = BLACK;
-   bar(0,0,100,20);
-   floodfill(10,10,BLACK);
+   bar(0,0,200,20);
    setcolor(GREEN);
-   settextstyle(1,0,6);
-   outtextxy(20,3,numToString(score));
-   outtextxy(70,3,"UP=");
+   settextstyle(1, 0, 6);
+   outtextxy(0, 3, "===== Score = ");
+   outtextxy(120, 3, numToString(score));
+   outtextxy(160, 3, "UP = ");
    switch(up)
    {
       case 1:
@@ -303,11 +300,14 @@ void drawPacman(int x, int y, int direct)
 void clearPerson(int map[32][28], int x, int y)
 {
   int i , j;
+  setcolor(BLACK);
+  _fill_color=BLACK;
+  bar((x-1)*UNIT,(y-1)*UNIT,(x+2)*UNIT,(y+2)*UNIT);
   setcolor(EGA_BLUE);
-  for(i=y-1;i<=y+1;i++)
+        for(i=y-1;i<=y+1;i++)
      for(j=x-1;j<=x+1;j++)
     {
-      if((map[i][j]==0||map[i][j]==4)&&(map[i][j+1]==1||map[i][j+1]==2||map[i][j+1]==3)&&(map[i+1][j]==0||map[i+1][j]==4)&&(map[i-1][j]==0||map[i-1][j]==4))
+        if((map[i][j]==0||map[i][j]==4)&&(map[i][j+1]==1||map[i][j+1]==2||map[i][j+1]==3)&&(map[i+1][j]==0||map[i+1][j]==4)&&(map[i-1][j]==0||map[i-1][j]==4))
         line((j+1)*UNIT,10+i*UNIT,(j+1)*UNIT,10+(i+1)*UNIT);
     
    //豆左竖线
@@ -565,5 +565,6 @@ void gameOverPage(int score)
   cprintf("GAME OVER");
   gotoxy(20,10);
   cprintf("score:%d",score);
+  getch();
 
 }
