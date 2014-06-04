@@ -83,7 +83,43 @@ int map[32][28] = {
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 4, 4, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+  {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+  {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+  {0, 3, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 3, 0},
+  {0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0},
+  {0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0},
+  {0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0},
+  {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+  {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+};
+
+int mapOrigin[32][28] = {
+// 0  1  2  3  4  5     7     9     11    13    15    17    19    21    23    25    27 
+  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+  {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+  {0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0},
+  {0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+  {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+  {0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+  {0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+  {0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+  {0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 4, 4, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
@@ -148,7 +184,7 @@ void gameInitial() {
   for (i = 0; i < 3; i++) {
     ghost[i].mapX = 12 + i * 2;
     ghost[i].mapY = 16;
-    ghost[i].screenX = mapToscreen(ghost[i].mapX);
+    ghost[i].screenX = mapToscreen(ghost[i].mapX) + UNIT / 2;
     ghost[i].screenY = mapToscreen(16);
     ghost[i].dir = UP;
     ghost[i].burst = 0;
@@ -263,18 +299,29 @@ void changeDir() {
 }
 
 void pacmanRound() {
-  clearPerson(map, pacman.mapX, pacman.mapY);
   switch (pacman.dir) {
     case UP:
+        if (map[pacman.mapY + 1][pacman.mapX] != 0)
+          clearPerson(map, pacman.mapX, pacman.mapY + 1);
+        clearPerson(map, pacman.mapX, pacman.mapY);
         handleUp();
         break;
     case DOWN:
+        if (map[pacman.mapY - 1][pacman.mapX] != 0)
+          clearPerson(map, pacman.mapX, pacman.mapY - 1);
+        clearPerson(map, pacman.mapX, pacman.mapY);
         handleDown();
         break;
     case LEFT:
+        if (map[pacman.mapY][pacman.mapX + 1] != 0)
+          clearPerson(map, pacman.mapX + 1, pacman.mapY);
+        clearPerson(map, pacman.mapX, pacman.mapY);
         handleLeft();
         break;
     case RIGHT:
+        if (map[pacman.mapY][pacman.mapX - 1] != 0)
+          clearPerson(map, pacman.mapX - 1, pacman.mapY);
+        clearPerson(map, pacman.mapX, pacman.mapY);
         handleRight();
         break;
   }
@@ -284,32 +331,40 @@ void pacmanRound() {
 
 
 void handleGhostUp(int i) {
-  if (map[ghost[i].mapY - 1][ghost[i].mapX] == 0 && ghost[i].screenY <= mapToscreen(ghost[i].mapY) + UNIT / 2)
+  if (map[ghost[i].mapY - 1][ghost[i].mapX] == 0 && ghost[i].screenY <= mapToscreen(ghost[i].mapY) + UNIT / 2) {
+    ghost[i].screenY = mapToscreen(ghost[i].mapY) + UNIT / 2;
     return;
+  }
   ghost[i].screenY -= ghost[i].speed;
   if (ghost[i].screenY < mapToscreen(ghost[i].mapY))
     ghost[i].mapY--;
 }
 
 void handleGhostDown(int i) {
-  if (map[ghost[i].mapY + 1][ghost[i].mapX] == 0 && ghost[i].screenY >= mapToscreen(ghost[i].mapY) + UNIT / 2)
+  if (map[ghost[i].mapY + 1][ghost[i].mapX] == 0 && ghost[i].screenY >= mapToscreen(ghost[i].mapY) + UNIT / 2) {
+    ghost[i].screenY = mapToscreen(ghost[i].mapY) + UNIT / 2;
     return;
+  }
   ghost[i].screenY += ghost[i].speed;
   if (ghost[i].screenY > mapToscreen(ghost[i].mapY + 1))
     ghost[i].mapY++;
 }
 
 void handleGhostLeft(int i) {
-  if (map[ghost[i].mapY][ghost[i].mapX - 1] == 0 && ghost[i].screenX <= mapToscreen(ghost[i].mapX) + UNIT / 2)
+  if (map[ghost[i].mapY][ghost[i].mapX - 1] == 0 && ghost[i].screenX <= mapToscreen(ghost[i].mapX) + UNIT / 2) {
+    ghost[i].screenX = mapToscreen(ghost[i].mapX) + UNIT / 2;
     return;
+  }
   ghost[i].screenX -= ghost[i].speed;
   if (ghost[i].screenX < mapToscreen(ghost[i].mapX))
     ghost[i].mapX--;
 }
 
 void handleGhostRight(int i) {
-  if (map[ghost[i].mapY][ghost[i].mapX + 1] == 0 && ghost[i].screenX >= mapToscreen(ghost[i].mapX) + UNIT / 2)
+  if (map[ghost[i].mapY][ghost[i].mapX + 1] == 0 && ghost[i].screenX >= mapToscreen(ghost[i].mapX) + UNIT / 2) {
+    ghost[i].screenX = mapToscreen(ghost[i].mapX) + UNIT / 2;
     return;
+  }
   ghost[i].screenX += ghost[i].speed;
   if (ghost[i].screenX > mapToscreen(ghost[i].mapX + 1))
     ghost[i].mapX++;
@@ -352,7 +407,6 @@ void changeGhostDir(int index) {
     if (map[ghost[index].mapY][ghost[index].mapX + 1] != 0)
       flag++;
 
-    outtextxy(170,3,numToString(flag));
     if (flag) {
       coord ghostPos[4];
       for (i = 0; i < 4; i++)
@@ -369,18 +423,29 @@ void changeGhostDir(int index) {
 void ghostRound() {
   int i;
   for (i = 0; i < 4; i++) {
-    clearPerson(map, ghost[i].mapX, ghost[i].mapY);
     switch (ghost[i].dir) {
     case UP:
+        if (map[ghost[i].mapY + 1][ghost[i].mapX] != 0)
+          clearPerson(map, ghost[i].mapX, ghost[i].mapY + 1);
+        clearPerson(map, ghost[i].mapX, ghost[i].mapY);
         handleGhostUp(i);
         break;
     case DOWN:
+        if (map[ghost[i].mapY - 1][ghost[i].mapX] != 0)
+          clearPerson(map, ghost[i].mapX, ghost[i].mapY - 1);
+        clearPerson(map, ghost[i].mapX, ghost[i].mapY);
         handleGhostDown(i);
         break;
     case LEFT:
+        if (map[ghost[i].mapY][ghost[i].mapX + 1] != 0)
+          clearPerson(map, ghost[i].mapX + 1, ghost[i].mapY);
+        clearPerson(map, ghost[i].mapX, ghost[i].mapY);
         handleGhostLeft(i);
         break;
     case RIGHT:
+        if (map[ghost[i].mapY][ghost[i].mapX - 1] != 0)
+          clearPerson(map, ghost[i].mapX - 1, ghost[i].mapY);
+        clearPerson(map, ghost[i].mapX, ghost[i].mapY);
         handleGhostRight(i);
         break;
     }
@@ -392,8 +457,28 @@ void ghostRound() {
   }
 }
 
-void eventHandler() {
+void burstChange() {
   int i;
+  for (i = 0; i < 4; i++) {
+    switch (ghost[i].dir) {
+      case LEFT:
+          ghost[i].dir = RIGHT; //如果方向相反则立即掉头
+        break;
+      case RIGHT:
+          ghost[i].dir = LEFT;
+        break;
+      case UP:
+          ghost[i].dir = DOWN;
+        break;
+      case DOWN:
+          ghost[i].dir = UP;
+        break;
+    }
+  }
+}
+
+void eventHandler() {
+  int i, j;
   /* 判定吃豆豆事件
   */
   if (map[pacman.mapY][pacman.mapX] == 1) {
@@ -411,9 +496,10 @@ void eventHandler() {
     for (i = 0; i < 4; i++) {
       ghost[i].burst = 1200;
     }
+    burstChange();
     drawInfo(global.score, global.life);
   }
-  /* 判定 Ghost 与 pacman 相撞事件
+  /* 判定 Ghost 相关事件
   */
   for (i = 0; i < 4; i++) {
     if (pacman.mapX == ghost[i].mapX && pacman.mapY == ghost[i].mapY) {
@@ -424,7 +510,7 @@ void eventHandler() {
         gameInitial();
       }
       else {
-        global.score += 200;
+        global.score += 400;
         ghost[i].mapX = 12 + i * 2;
         ghost[i].mapY = 16;
         ghost[i].screenX = (12 + i * 2) * UNIT + UNIT / 2 + OFFSET;
@@ -434,8 +520,55 @@ void eventHandler() {
         drawInfo(global.score, global.life);
       }
     }
+
+    if (ghost[i].mapY == 15) {
+      switch (ghost[i].mapX) {
+        case 0:
+            clearPerson(map, ghost[i].mapX, ghost[i].mapY);
+            clearPerson(map, ghost[i].mapX + 1, ghost[i].mapY);
+            ghost[i].mapX = 26;
+            ghost[i].screenX = mapToscreen(26) + UNIT / 2;
+            break;
+        case 27:
+            clearPerson(map, ghost[i].mapX, ghost[i].mapY);
+            clearPerson(map, ghost[i].mapX - 1, ghost[i].mapY);
+            ghost[i].mapX = 1;
+            ghost[i].screenX = mapToscreen(1) + UNIT / 2;
+            break;
+      }
+    }
   }
-  if (global.life <= 0)
+  /* 判定是否在 15 特殊行
+  */
+  if (pacman.mapY == 15) {
+    switch (pacman.mapX) {
+      case 0:
+          clearPerson(map, pacman.mapX, pacman.mapY);
+          clearPerson(map, pacman.mapX + 1, pacman.mapY);
+          pacman.mapX = 26;
+          pacman.screenX = mapToscreen(26) + UNIT / 2;
+          break;
+      case 27:
+          clearPerson(map, pacman.mapX, pacman.mapY);
+          clearPerson(map, pacman.mapX - 1, pacman.mapY);
+          pacman.mapX = 1;
+          pacman.screenX = mapToscreen(1) + UNIT / 2;
+          break;
+    }
+  }
+
+  if (global.dou == 0) {
+    global.dou = 308;
+    for (i = 0; i < MAP_HEIGHT; i++)
+      for (j = 0; j < MAP_WIDTH; j++)
+        map[i][j] = mapOrigin[i][j];
+    gameInitial();
+    pacman.speed *= 2;
+    for (i = 0; i < 4; i++)
+      ghost[i].speed *= 3;
+  }
+
+  if (global.life < 0)
     global.gameover = 1;
 }
 
@@ -443,24 +576,24 @@ void process() {
   static int timeCounter = 0,
              actionFlag = 0;
 
-  if (timeCounter % 2000 == 0) {
+  if (timeCounter % 1000 == 0) {
     pacmanRound();
     ghostRound();
     eventHandler();
 
   /* test code
-  */
+
     setcolor(EGA_BLACK);
     _fill_color = BLACK;
     bar(0,0,300,20);
     floodfill(10,10,BLACK);
     setcolor(GREEN);
     settextstyle(1,0,6);
-    outtextxy(20,3,numToString(ghost[0].dir));
-    outtextxy(70,3,numToString(ghost[1].dir));
-    outtextxy(90,3,numToString(ghost[2].dir));
-    outtextxy(120,3,numToString(ghost[3].dir));
-    // outtextxy(170,3,numToString(pacman.screenY));
+    outtextxy(20,3,numToString(pacman.mapX));
+    outtextxy(70,3,numToString(pacman.mapY));
+    outtextxy(90,3,numToString(map[pacman.mapY][pacman.mapX - 1]));
+    outtextxy(120,3,numToString(pacman.screenX));
+    outtextxy(170,3,numToString(pacman.screenY));
   /* test code End
   */
     timeCounter = (timeCounter + 1) % 10000;
@@ -473,9 +606,9 @@ int main() {
   int mode, i;
   mode = welcomePage();
   global.score = 0;
-  global.life = 2;
+  global.life = 3;
   global.gameover = 0;
-  global.dou = 310;
+  global.dou = 308;
   gameInitial();
 
   /* initialize ai
