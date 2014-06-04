@@ -139,7 +139,13 @@ int mapOrigin[32][28] = {
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 };
 
-
+int getKeySCode()
+{
+  union REGS rg;
+    rg.h.ah=0;
+  int86(0x16,&rg,&rg);
+  return rg.h.ah;
+}
 
 double mapToscreen(int n) {
   return n * UNIT + OFFSET;
@@ -569,9 +575,9 @@ void eventHandler() {
       for (j = 0; j < MAP_WIDTH; j++)
         map[i][j] = mapOrigin[i][j];
     gameInitial();
-    pacman.speed = 2 * 1.5;
+    pacman.speed = 2;
     for (i = 0; i < 4; i++)
-      ghost[i].speed *= 3;
+      ghost[i].speed += 2;
   }
 
   if (global.life < 0)
