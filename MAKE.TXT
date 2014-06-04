@@ -2,14 +2,7 @@ Open Watcom Make Version 1.9
 Portions Copyright (c) 1988-2002 Sybase, Inc. All Rights Reserved.
 Source code is available under the Sybase Open Watcom Public License.
 See http://www.openwatcom.org/ for details.
-	wcc386  testmain.c
-Open Watcom C32 Optimizing Compiler Version 1.9
-Portions Copyright (c) 1984-2002 Sybase, Inc. All Rights Reserved.
-Source code is available under the Sybase Open Watcom Public License.
-See http://www.openwatcom.org/ for details.
-testmain.c: 54 lines, included 2174, 0 warnings, 0 errors
-Code size: 270
-	wlink option quiet name test.exe file { ai.obj fool.obj normal.obj expert.obj testmain.obj }
+	wlink option quiet name pacman.exe file { ai.obj fool.obj normal.obj expert.obj draw.obj main.obj }
 Warning! W1027: file fool.obj(C:\WATCOM\PACMAN\fool.c): redefinition of newCoord_ ignored
 Warning! W1027: file fool.obj(C:\WATCOM\PACMAN\fool.c): redefinition of coordMove_ ignored
 Warning! W1027: file fool.obj(C:\WATCOM\PACMAN\fool.c): redefinition of _dx ignored
@@ -22,7 +15,24 @@ Warning! W1027: file expert.obj(C:\WATCOM\PACMAN\expert.c): redefinition of newC
 Warning! W1027: file expert.obj(C:\WATCOM\PACMAN\expert.c): redefinition of coordMove_ ignored
 Warning! W1027: file expert.obj(C:\WATCOM\PACMAN\expert.c): redefinition of _dx ignored
 Warning! W1027: file expert.obj(C:\WATCOM\PACMAN\expert.c): redefinition of _dy ignored
-Warning! W1027: file testmain.obj(C:\WATCOM\PACMAN\testmain.c): redefinition of newCoord_ ignored
-Warning! W1027: file testmain.obj(C:\WATCOM\PACMAN\testmain.c): redefinition of coordMove_ ignored
-Warning! W1027: file testmain.obj(C:\WATCOM\PACMAN\testmain.c): redefinition of _dx ignored
-Warning! W1027: file testmain.obj(C:\WATCOM\PACMAN\testmain.c): redefinition of _dy ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of newCoord_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of coordMove_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of moveAI_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of checkDirection_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of getDistance_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of countWeightedElement_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of foolConstruct_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of normalConstruct_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of numToString_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of drawWelcomePage_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of initMap_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of drawInfo_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of drawPacman_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of clearPerson_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of drawGhost_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of gameOverPage_ ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of _dx ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of _dy ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of _depth ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of _g ignored
+Warning! W1027: file main.obj(C:\WATCOM\PACMAN\main.c): redefinition of _queue ignored
