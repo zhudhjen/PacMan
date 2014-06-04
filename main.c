@@ -569,7 +569,7 @@ void eventHandler() {
       for (j = 0; j < MAP_WIDTH; j++)
         map[i][j] = mapOrigin[i][j];
     gameInitial();
-    pacman.speed *= 2;
+    pacman.speed = 2 * 1.5;
     for (i = 0; i < 4; i++)
       ghost[i].speed *= 3;
   }
