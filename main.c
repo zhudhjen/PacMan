@@ -577,6 +577,7 @@ void process() {
              actionFlag = 0;
 
   if (timeCounter % 1000 == 0) {
+    _active_page = _back_page;
     pacmanRound();
     ghostRound();
     eventHandler();
@@ -597,6 +598,7 @@ void process() {
   /* test code End
   */
     timeCounter = (timeCounter + 1) % 10000;
+    setvisualpage(_back_page);
   }
   else 
     timeCounter = (timeCounter + 1) % 10000;
