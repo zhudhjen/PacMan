@@ -19,6 +19,7 @@
 #define VK_RIGHT 0x4d00
 #define VK_ENTER 0x1c0d
 #define VK_ESC 0x011b
+#define VK_SPACE 0x3920
 
 int welcomePage();
 void gameInitial();
@@ -138,6 +139,8 @@ int mapOrigin[32][28] = {
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 };
 
+
+
 double mapToscreen(int n) {
   return n * UNIT + OFFSET;
 }
@@ -179,7 +182,7 @@ void gameInitial() {
   pacman.screenX = 14 * UNIT + UNIT / 2 + OFFSET;
   pacman.screenY = 18 * UNIT + UNIT / 2 + OFFSET;
   pacman.dir = UP;
-  pacman.speed = 1.2;
+  pacman.speed = 1.5;
   drawPacman((int)pacman.screenX, (int)pacman.screenY, pacman.dir);
   for (i = 0; i < 3; i++) {
     ghost[i].mapX = 12 + i * 2;
@@ -188,7 +191,7 @@ void gameInitial() {
     ghost[i].screenY = mapToscreen(16);
     ghost[i].dir = UP;
     ghost[i].burst = 0;
-    ghost[i].speed = 0.9;
+    ghost[i].speed = 1.2;
     drawGhost(i, (int)ghost[i].screenX, (int)ghost[i].screenY, ghost[i].dir, ghost[i].burst);
   }
   ghost[3].mapX = 14;
@@ -231,6 +234,9 @@ void keyPress() {
         if (pacman.dir == UP)
           pacman.dir = pacman.operation;
         break;
+    case VK_SPACE:
+          pacman.speed *= 2;
+          break;
     case VK_ESC:
         global.gameover = 1;
   }
@@ -576,8 +582,7 @@ void process() {
   static int timeCounter = 0,
              actionFlag = 0;
 
-  if (timeCounter % 1000 == 0) {
-    _active_page = _back_page;
+  if (timeCounter % 1500 == 0) {
     pacmanRound();
     ghostRound();
     eventHandler();
@@ -598,7 +603,6 @@ void process() {
   /* test code End
   */
     timeCounter = (timeCounter + 1) % 10000;
-    setvisualpage(_back_page);
   }
   else 
     timeCounter = (timeCounter + 1) % 10000;
