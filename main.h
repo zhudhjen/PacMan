@@ -1,6 +1,7 @@
-﻿#include "ai.c"
+#include "ai.c"
 #include "fool.c"
 #include "normal.c"
+#include "coord.h"
 #include "dos.h"
 #include "draw.c"
 
@@ -17,12 +18,15 @@
 #define VK_LEFT 0x4b00
 #define VK_RIGHT 0x4d00
 #define VK_ENTER 0x1c0d
+#define VK_ESC 0x011b
+#define VK_SPACE 0x3920
 
-void welcomePage();
+int welcomePage();
 void gameInitial();
 void keyPress();
 void process();
 void eventHandler();
+double mapToscreen(int n);
 
 void pacmanRound();
 void handleUp();

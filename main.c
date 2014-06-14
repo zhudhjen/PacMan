@@ -1,48 +1,6 @@
-#include "ai.c"
-#include "fool.c"
-#include "normal.c"
-#include "coord.h"
-#include "dos.h"
-#include "draw.c"
-
-#define MAP_WIDTH 28
-#define MAP_HEIGHT 32
-
-#define UP 0
-#define DOWN 1
-#define LEFT 2
-#define RIGHT 3
-
-#define VK_UP 0x4800
-#define VK_DOWN 0x5000
-#define VK_LEFT 0x4b00
-#define VK_RIGHT 0x4d00
-#define VK_ENTER 0x1c0d
-#define VK_ESC 0x011b
-#define VK_SPACE 0x3920
-
-int welcomePage();
-void gameInitial();
-void keyPress();
-void process();
-void eventHandler();
-double mapToscreen(int n);
-
-void pacmanRound();
-void handleUp();
-void handleDown();
-void handleLeft();
-void handleRight();
-void changeDir();
-
-void ghostRound();
-void handleGhostUp(int i);
-void handleGhostDown(int i);
-void handleGhostLeft(int i);
-void handleGhostRight(int i);
-void changeGhostDir(int i);
-
-
+#include "main.h"
+/* 全局控制变量
+*/
 struct Global {
   int score;
   int life;
@@ -50,6 +8,8 @@ struct Global {
   int dou;
 } global;
 
+/* Pacman 对象
+*/
 struct Pacman {
   double screenX, screenY;
   int mapX, mapY;
@@ -58,6 +18,8 @@ struct Pacman {
   double speed;
 } pacman;
 
+/* Ghost 对象
+*/
 struct Ghost {
   double screenX, screenY;
   int mapX, mapY;
@@ -67,6 +29,8 @@ struct Ghost {
   double speed;
 } ghost[4];
 
+/* 游戏用地图
+*/
 int map[32][28] = {
 // 0  1  2  3  4  5     7     9     11    13    15    17    19    21    23    25    27 
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -103,6 +67,8 @@ int map[32][28] = {
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 };
 
+/* 原始地图
+*/
 int mapOrigin[32][28] = {
 // 0  1  2  3  4  5     7     9     11    13    15    17    19    21    23    25    27 
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -139,18 +105,15 @@ int mapOrigin[32][28] = {
   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 };
 
-int getKeySCode()
-{
-  union REGS rg;
-    rg.h.ah=0;
-  int86(0x16,&rg,&rg);
-  return rg.h.ah;
-}
+/* 由地图转换至屏幕像素
+*/
 
 double mapToscreen(int n) {
   return n * UNIT + OFFSET;
 }
 
+/* 欢迎界面
+*/
 int welcomePage() {
   int mode = 0;
   int key;
@@ -179,6 +142,8 @@ int welcomePage() {
   }
 }
 
+/* 游戏初始化
+*/
 void gameInitial() {
   int i;
   initMap(map);
@@ -223,7 +188,8 @@ void keyPress() {
     case VK_LEFT:
         pacman.operation = LEFT;
         if (pacman.dir == RIGHT)
-          pacman.dir = pacman.operation; //如果方向相反则立即掉头
+          pacman.dir = pacman.operation; 
+          //如果方向相反则立即掉头
         break;
     case VK_RIGHT:
         pacman.operation = RIGHT;
@@ -241,19 +207,22 @@ void keyPress() {
           pacman.dir = pacman.operation;
         break;
     case VK_SPACE:
-          pacman.speed *= 2;
+          pacman.speed += 2;
           break;
     case VK_ESC:
         global.gameover = 1;
   }
 }
 
+/* 处理上下左右移动
+*/
 void handleUp() {
   if (map[pacman.mapY - 1][pacman.mapX] == 0 && pacman.screenY <= mapToscreen(pacman.mapY) + UNIT / 2) {
     pacman.screenY = mapToscreen(pacman.mapY) + UNIT / 2;
     return;
   }
   pacman.screenY -= pacman.speed;
+  // 根据屏幕位置改变地图数据
   if (pacman.screenY < mapToscreen(pacman.mapY))
     pacman.mapY--;
 }
@@ -288,28 +257,41 @@ void handleRight() {
     pacman.mapX++;
 }
 
+/* 处理Pacman的转向
+*/
 void changeDir() {
-  if ((int)pacman.screenX == mapToscreen(pacman.mapX) + UNIT / 2 && (int)pacman.screenY == mapToscreen(pacman.mapY) + UNIT / 2)
+  if ((int)pacman.screenX > mapToscreen(pacman.mapX) + UNIT / 2 - 2 && (int)pacman.screenX < mapToscreen(pacman.mapX) + UNIT / 2 + 2)
+  if ((int)pacman.screenY > mapToscreen(pacman.mapY) + UNIT / 2 - 2 && (int)pacman.screenY < mapToscreen(pacman.mapY) + UNIT / 2 + 2)  
   switch (pacman.operation) {
     case UP:
-        if (map[pacman.mapY - 1][pacman.mapX] != 0)
+        if (map[pacman.mapY - 1][pacman.mapX] != 0) {
           pacman.dir = pacman.operation;
+          pacman.screenX = mapToscreen(pacman.mapX) + UNIT / 2;
+        } 
         break;
     case DOWN:
-        if (map[pacman.mapY + 1][pacman.mapX] != 0)
+        if (map[pacman.mapY + 1][pacman.mapX] != 0) {
           pacman.dir = pacman.operation;
+          pacman.screenX = mapToscreen(pacman.mapX) + UNIT / 2;
+        }
         break;
     case LEFT:
-        if (map[pacman.mapY][pacman.mapX - 1] != 0)
+        if (map[pacman.mapY][pacman.mapX - 1] != 0) {
           pacman.dir = pacman.operation;
+          pacman.screenY = mapToscreen(pacman.mapY) + UNIT / 2;
+        }
         break;
     case RIGHT:
-        if (map[pacman.mapY][pacman.mapX + 1] != 0)
+        if (map[pacman.mapY][pacman.mapX + 1] != 0) {
           pacman.dir = pacman.operation;
+          pacman.screenY = mapToscreen(pacman.mapY) + UNIT / 2;
+        }
         break;
   }
 }
 
+/* 处理Pacman的数据
+*/
 void pacmanRound() {
   switch (pacman.dir) {
     case UP:
@@ -341,6 +323,8 @@ void pacmanRound() {
   drawPacman((int)pacman.screenX, (int)pacman.screenY, pacman.dir);
 }
 
+/* 处理每一次Ghost的移动
+*/
 
 void handleGhostUp(int i) {
   if (map[ghost[i].mapY - 1][ghost[i].mapX] == 0 && ghost[i].screenY <= mapToscreen(ghost[i].mapY) + UNIT / 2) {
@@ -382,6 +366,8 @@ void handleGhostRight(int i) {
     ghost[i].mapX++;
 }
 
+/* 改变Ghost 的方向，调用Ghost的AI
+*/
 void changeGhostDir(int index) {
   int dir[4];
   int i;
@@ -432,6 +418,8 @@ void changeGhostDir(int index) {
   }
 }
 
+/* Ghost数据处理总函数
+*/
 void ghostRound() {
   int i;
   for (i = 0; i < 4; i++) {
@@ -462,13 +450,16 @@ void ghostRound() {
         break;
     }
     changeGhostDir(i);
-    drawGhost(i, (int)ghost[i].screenX, (int)ghost[i].screenY, ghost[i].dir, ghost[i].burst);
     if (ghost[i].burst) {
       ghost[i].burst--;
     }
   }
+  for (i = 0; i < 4; i++)
+    drawGhost(i, (int)ghost[i].screenX, (int)ghost[i].screenY, ghost[i].dir, ghost[i].burst);
 }
 
+/* 处理吃到救命豆的事件
+*/
 void burstChange() {
   int i;
   for (i = 0; i < 4; i++) {
@@ -489,6 +480,8 @@ void burstChange() {
   }
 }
 
+/* 每次Pacman和Ghost移动后的事件处理
+*/
 void eventHandler() {
   int i, j;
   /* 判定吃豆豆事件
@@ -568,7 +561,7 @@ void eventHandler() {
           break;
     }
   }
-
+  // 豆豆数量为0就过关
   if (global.dou == 0) {
     global.dou = 308;
     for (i = 0; i < MAP_HEIGHT; i++)
@@ -579,7 +572,7 @@ void eventHandler() {
     for (i = 0; i < 4; i++)
       ghost[i].speed += 2;
   }
-
+  // 没命了gameover
   if (global.life < 0)
     global.gameover = 1;
 }
@@ -588,30 +581,15 @@ void process() {
   static int timeCounter = 0,
              actionFlag = 0;
 
-  if (timeCounter % 1500 == 0) {
+  if ((inportb(0x3da)&0x08) != 0 && actionFlag == 0) {
     pacmanRound();
     ghostRound();
     eventHandler();
-
-  /* test code
-
-    setcolor(EGA_BLACK);
-    _fill_color = BLACK;
-    bar(0,0,300,20);
-    floodfill(10,10,BLACK);
-    setcolor(GREEN);
-    settextstyle(1,0,6);
-    outtextxy(20,3,numToString(pacman.mapX));
-    outtextxy(70,3,numToString(pacman.mapY));
-    outtextxy(90,3,numToString(map[pacman.mapY][pacman.mapX - 1]));
-    outtextxy(120,3,numToString(pacman.screenX));
-    outtextxy(170,3,numToString(pacman.screenY));
-  /* test code End
-  */
-    timeCounter = (timeCounter + 1) % 10000;
+    actionFlag = 1;
   }
   else 
-    timeCounter = (timeCounter + 1) % 10000;
+    if ((inportb(0x3da)&0x08) == 0 && actionFlag == 1)
+      actionFlag = 0;
 }
 
 int main() {
@@ -637,7 +615,8 @@ int main() {
     for (i = 0; i < 4; i++)
       normalConstruct(&ghost[i].ai, ghost[i].speed, pacman.speed, i);
   }
-
+  /* process in game
+  */
 	while(1) {
     keyPress();
     process(); 
