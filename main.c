@@ -107,6 +107,7 @@ int mapOrigin[32][28] = {
 
 /* 由地图转换至屏幕像素
 */
+int soundCounter = 0;
 
 double mapToscreen(int n) {
   return n * UNIT + OFFSET;
@@ -588,8 +589,15 @@ void process() {
     actionFlag = 1;
   }
   else 
-    if ((inportb(0x3da)&0x08) == 0 && actionFlag == 1)
+    if ((inportb(0x3da)&0x08) == 0 && actionFlag == 1) {
       actionFlag = 0;
+      soundCounter++;
+      if (soundCounter % 15 == 0) {
+        sound(296);
+        if (soundCounter % 30 == 0)
+          sound(330);
+      }
+    }
 }
 
 int main() {
@@ -617,11 +625,13 @@ int main() {
   }
   /* process in game
   */
+ 
 	while(1) {
     keyPress();
     process(); 
     if (global.gameover) {
       gameOverPage(global.score);
+      nosound();
       break;
     }          
   }
