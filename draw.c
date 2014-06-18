@@ -26,7 +26,7 @@ char *numToString(int num) {
 
 void drawWelcomePage(int smode)
 {
-   int driver=0, mode=VESA_1024x768x8bit;
+   int driver=0, mode=VESA_1024x768x8bit ;
    initgraph(&driver, &mode, "");
    cleardevice();
    load_8bit_bmp(30,0,"pacman.bmp");
@@ -196,7 +196,7 @@ void drawInfo(int score, int up)
    settextstyle(1, 0, 6);
    outtextxy(0, 663, "========================= Score = ");
    outtextxy(270, 663, numToString(score));
-   outtextxy(300, 663, "UP = ");
+   outtextxy(310, 663, "UP = ");
    outtextxy(350, 663, numToString(up));
    outtextxy(380, 663, "=======================");
 }
