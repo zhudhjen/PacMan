@@ -1,7 +1,6 @@
-#include "ai.c"
-#include "fool.c"
-#include "normal.c"
-#include "coord.h"
+#include "fool.h"
+#include "normal.h"
+#include "expert.h"
 #include "dos.h"
 #include "draw.c"
 

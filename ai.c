@@ -97,4 +97,3 @@ double countWeightedElement(int dep, int map[MAP_HEIGHT][MAP_WIDTH], coord pos, 
     }
     return count;
 }
-

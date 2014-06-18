@@ -1,8 +1,8 @@
 CC = wcc386
 LINKER = wlink
-LFLAGS = option quiet
+LFLAGS = 
 
-OBJS = ai.obj fool.obj normal.obj expert.obj draw.obj main.obj
+OBJS = coord.obj ai.obj fool.obj normal.obj expert.obj draw.obj main.obj
 
 .c.obj : .autodepend
     $(CC) $(CFLAGS) $<

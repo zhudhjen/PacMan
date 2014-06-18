@@ -46,7 +46,7 @@ double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH
     double averDist, eval, maxe = 0;
 
     //search for a length of 10 blocks
-    if (frame * this->aiSpeed >= 10 || dep>=5)
+    if (frame * this->aiSpeed >= 3 || dep>=5)
     {
         for (j = 0; j < 4; ++j)
             for (i = 0; i < 4; ++i)
