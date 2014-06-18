@@ -4,6 +4,7 @@
 
 int hghostDir[20][4], hmap[20][MAP_HEIGHT][MAP_WIDTH];
 coord hghostPos[20][4];
+int countElement[3][300];
 
 extern void expertConstruct (classAI *this, double ai_speed, double player_speed, int ai_index)
 {
@@ -16,7 +17,7 @@ extern void expertConstruct (classAI *this, double ai_speed, double player_speed
 
 int expertMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, int *ghostDir, double pacPosX, double pacPosY, int burst)
 {
-    int i, decision, tmp, ind = this->index;
+    int i, j, decision, tmp, ind = this->index;
     double maxe, eval;
     coord PacPos = newCoord(floor(pacPosX), floor(pacPosY));
     for (i = 0; i < 4; ++i)
@@ -27,6 +28,9 @@ int expertMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
             memcpy(hmap[0], map, MAP_WIDTH*MAP_HEIGHT*sizeof(int));
             memcpy(hghostPos[0], ghostPos, 4*sizeof(int));
             memcpy(hghostDir[0], ghostDir, 4*sizeof(int));
+            for (i = 1; i < 3; ++i)
+                for (j = 0; j < 300; ++j)
+                    countElement[i][j] = -1;
             eval = deepEval(0, 0, this, hmap[0], hghostPos[0], hghostDir[0], PacPos, burst, 0);
             if (eval > maxe)
             {
@@ -41,7 +45,7 @@ int expertMove (classAI *this, int map[MAP_HEIGHT][MAP_WIDTH], coord *ghostPos, 
 double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH],
         coord *ghostPos, int *ghostDir, coord PacPos, int burst, double burstRate)
 {
-    int i, j, turn, count = 0, total = 0, frameGone = 0, dir;
+    int i, j, turn, count = 0, total = 0, frameGone = 0, dir, dist;
     bool flag;
     double averDist, eval, maxe = 0;
 
@@ -57,7 +61,10 @@ double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH
                     count++;
                 }
         averDist = total / count * pow((1 - 2 * burstRate), 2);
-        eval = countWeightedElement(0, map, PacPos, averDist / 2, 1);
+        dist = averDist / 2;
+        if (countElement[1][dist] == -1)
+            countElement[1][dist] = countWeightedElement(0, map, PacPos, dist, 1);
+        eval = countElement[1][dist];
         return eval;
     }
 
@@ -99,8 +106,12 @@ double deepEval(int dep, int frame, classAI *this, int map[MAP_HEIGHT][MAP_WIDTH
     if (burst > 0)
         burstRate = 1;
     else
-        burstRate = 1 - exp(this->playerSpeed * countWeightedElement(0, map, PacPos, 
-                floor((frame + frameGone) * this->playerSpeed), 2));
+    {
+        dist = floor((frame + frameGone) * this->playerSpeed);
+        if (countElement[2][dist] == -1)
+            countElement[2][dist] = countWeightedElement(0, map, PacPos, dist, 2);
+        burstRate = 1 - exp(this->playerSpeed * countElement[2][dist]);
+    }
 
     //search for the following moving
     for (i = 0; i < 4; ++i)

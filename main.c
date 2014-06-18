@@ -621,7 +621,7 @@ int main() {
   }
   else if (mode == 2) {
     for (i = 0; i < 4; i++)
-      expertConstruct(&ghost[i].ai, ghost[i].speed, pacman.speed, i);
+      normalConstruct(&ghost[i].ai, ghost[i].speed, pacman.speed, i);
   }
   /* process in game
   */
